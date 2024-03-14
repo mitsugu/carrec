@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>カルカソンヌ基本ゲーム棋譜仕様試案 Ver.0.1</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<h1>カルカソンヌ基本ゲーム棋譜仕様試案 Ver.0.1</h1>
+	<div id="contents">
+		<p>カルカソンヌは Klaus-Jürgen Wrede がデザインし、ドイツの Hans im Glück により製品化されました。</p>
+		<ul class="nomark">
+			<li><b>独国判:</b> &copy; 2000, 2024 Hans im Glück Verlags-GmbH</li>
+			<li><b>米国版:</b> &copy; 2012, 2024 Z-Man Games</li>
+			<li><b>日本版:</b> &copy; 2001, 2024 メビウスゲームズ</li>
+		</ul>
+		<p>本テキストは<a href="https://orzbruford.nobody.jp/">大山貢 (インターネットニックネーム OrzBruford)</a> により作成されました。また、この試案を作成するに当たり以下の文書、サイトを参考にし、また内容を継承しています。先人の知恵、努力に感謝します。</p>
+
+		<div class="">
+			<ul class="nomark">
+				<li><a href="https://www.carcassonnecentral.com/">Carcassonne Central</a></li>
+				<li><a href="https://wikicarpedia.com/car/Main_Page">WikiCarpedia</a></li>
+				<li><a href="https://www.wallaceprime.com/carc/CARCASSONNE%20NOTATION_CFW_v3.pdf">CARCASSONNE NOTATION Ver.3</a> by <a href="https://www.wallaceprime.com/">wallaceprime</a> 11.06/2022</li>
+			</ul>
+		</div>
+
+		<ol class="top">
+			<li>
+				<p class="unindent">はじめに</p>
+				<p>本稿の基本ゲームルールはトーナメントルールに準じるものとし、草原ルールが含まれ、Abbot 拡張ルールと The River 拡張ルールは含まないるものとする。その他の拡張のルールも含まないものとする。</p>
+				<p>またタイルの記述は Carcassone Central ならびに Wikicarpedia を継承するものとし、記載方法の定めがないか、もしくはそれが必須であると思われる場合に限り、最低限の拡張を行うものとする。</p>
+				<p>なお本稿は英語や横書き日本語のように左から右に向けて文字を書く文化を前提とする。</p>
+			</li>
+			<li>
+				<p class="unindent">棋譜全体の構成</p>
+				<p>棋譜は以下で構成される。</p>
+				<ol>
+					<li><a href="#gameinfo">ゲーム情報</a></li>
+					<li><a href="#playerinfo">プレイヤー情報</a></li>
+					<li><a href="#playlog">プレイログ</a></li>
+					<li><a href="#lastscoring">最終得点計算の情報</a></li>
+					<li><a href="#comment">コメント</a></li>
+				</ol>
+			</li>
+			<li>
+				<p class="unindent" id="gameinfo">ゲーム情報</p>
+				<p>以下をコンマで区切って列記する。</p>
+				<dl class="gameinfo">
+					<dt>試合日:</dt>
+					<dd>開始時刻をロケール付きで指定する。例えば、13:01 JST、04:01 UTC、あるいは 21:01 MST</dd>
+					<dt>ゲームの種類:</dt>
+					<dd>
+						<ol class="alphabet">
+							<li>Simple</li>
+							<li>BGA Arena</li>
+							<li>BGA 2022x12 April</li>
+							<li>Asmodee 2024x08 March</li>
+							<li>WTCOC 2022 3rd Round</li>
+							<li>UKGE 2022 Group stage</li>
+							<li>2024 Japan Championship Finals</li>
+						</ol>
+					</dd>
+					<dt>ゲームモード:</dt>
+					<dd>
+						<ol class="alphabet">
+							<li>Turn-based</li>
+							<li>Real-time</li>
+						</ol>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<p class="unindent" id="playerinfo">プレイヤー情報:</p>
+				<p>プレーヤーは、プレイ順に 1 行に 1 つずつ、次の情報で識別される。</p>
+				<ol class="alphabet">
+					<li>“A” で始まり、その後に “=” が続くプレイヤー ID</li>
+					<li>BGA ID または Asmodee Connect ID、あるいはニックネーム等</li>
+					<li>オプション: () 括弧内の実名</li>
+					<li>オプション: [] 括弧内の国名</li>
+					<li>オプション: &lt;&gt; 括弧内のミープルカラー</li>
+				</ol>
+				<p class="unindent">例:</p>
+				<dl>
+					<dt>一般的な 2 プレイヤー ゲーム:</dt>
+					<dd>
+						<ul class="nomark">
+							<li>A = wallaceprime (Chris Wallace) &lt;yellow&gt;</li>
+							<li>B = Riesemax &lt;black&gt;</li>
+						</ul>
+					</dd>
+					<dt>WTCOC 2 プレーヤー ゲーム:</dt>
+					<dd>
+						<ul class="nomark">
+							<li>A = wallaceprime (Chris Wallace) [UK]</li>
+							<li>B = isloun [RCP]</li>
+						</ul>
+					</dd>
+					<dt>一般的な 4 人用ゲーム:</dt>
+					<dd>
+						<ul class="nomark">
+							<li>A = danisthirty</li>
+							<li>B = wallaceprime</li>
+							<li>C = Corelli</li>
+							<li>D = ted the notty bear</li>
+						</ul>
+					</dd>
+				</dl>
+			</li>
+			<li>
+				<p class="unindent" id="playlog">プレイログ</p>
+				<p>以下の順序で 1 手ずつ記録する。</p>
+				<dl class="gamelog">
+					<dt>手番番号:</dt>
+					<dd><p class="unindent">1 から始まり 71 を最大数とする手番を表す連番。</p></dd>
+					<dt>プレイヤー記号</dt>
+					<dd><p class="unindent">A, B, C などのプレイヤーを示す記号。プレイヤー情報を参照。</p></dd>
+					<dt>タイルX座標</dt>
+					<dd><p class="unindent">スタートタイルの位置を X=0 としたときの記譜者から見た相対的な横位置。スタートタイルより左に置かれたタイルの X 座標は負の値となる。</p></dd>
+					<dt>タイルY座標</dt>
+					<dd><p>スタートタイルの位置を Y=0 としたときの記譜者から見た相対的な縦位置。スタートタイルより下に置かれたタイルの Y 座標は負の値となる。</p></dd>
+					<dt>タイルデザインとミープルの状態</dt>
+					<dd>
+						<!-- {{{ -->
+						<dl class="symbols">
+							<dt>地形の記号</dt>
+							<dd>
+								<!-- {{{ -->
+								<ul class="nomark">
+									<li>C: 都市 (City)</li>
+									<li>R: 道路 (Road)</li>
+									<li>F: 草原 (Field)</li>
+								</ul>
+								<!-- }}} -->
+							</dd>
+							<dt>ミープル関連記号</dt>
+							<dd>
+								<!-- {{{ -->
+								<ul class="nomark">
+									<li>m: 都市と道路のミープル</li>
+									<li>M: 草原のミープル</li>
+									<li>k: 修道院 (Mon<u>k</u>: 修行僧) のミープル</li>
+								</ul>
+								<!-- }}} -->
+							</dd>
+							<dt>タイルデザインの記述方法</dt>
+							<dd>
+								<!-- {{{ -->
+								<p>タイルのデザインの記述は Carcassone Central ならびに Wikicarpedia における略記法を採用し、12 時の方向から時計回りに地形の略号を記述するものとする。</p>
+								<p class="unindent"><b>例 (カッコ内赤は拡張記載案):</b></p>
+								<div class="grid">
+									<div class="column">
+										<img width="96" height="96" src="images/rfrf.png">
+										<p>RFRF</p>
+									</div>
+									<div class="column">
+										<img width="96" height="96" src="images/ffrr.png">
+										<p>FFRR</p>
+									</div>
+									<div class="column">
+										<img width="96" height="96" src="images/frrr.png">
+										<p>FRRR</p>
+									</div>
+									<div class="column">
+										<img width="96" height="96" src="images/rrrr.png">
+										<p>RRRR</p>
+									</div>
+								</div>
+								<div class="grid">
+									<div title="一辺都市" class="column">
+										<img width="96" height="96" src="images/cfff.png">
+										<p>CFFF</p>
+									</div>
+									<div title="道付き一辺都市" class="column">
+										<img width="96" height="96" src="images/crfr.png">
+										<p>CRFR</p>
+									</div>
+									<div title="左カーブ一辺都市" class="column">
+										<img width="96" height="96" src="images/cfrr.png">
+										<p>CFRR</p>
+									</div>
+									<div title="右カーブ一辺都市" class="column">
+										<img width="96" height="96" src="images/crrf.png">
+										<p>CRRF</p>
+									</div>
+								</div>
+								<div class="grid">
+									<div title="三叉路一辺都市" class="column">
+										<img width="96" height="96" src="images/crrr.png">
+										<p>CRRR</p>
+									</div>
+									<div title="チューブ都市" class="column">
+										<img width="96" height="96" src="images/1c2f.png">
+										<p>FCFC<br><span class="red">(2F1C)</span></p>
+									</div>
+									<div title="エンブレム付きチューブ都市" class="column">
+										<img width="96" height="96" src="images/1c2fe.png">
+										<p>FCFCE <sup>※1</sup><br><span class="red">(2F1CE <sup>※1</sup>)</span></p>
+									</div>
+									<div title="並行二辺都市" class="column">
+										<img width="96" height="96" src="images/2c1f.png">
+										<p>CFCF<br><span class="red">(2C1F)</span></p>
+									</div>
+								</div>
+								<div class="grid">
+									<div title="直交二辺都市" class="column">
+										<img width="96" height="96" src="images/cffc^.png">
+										<p>CFFC<br><span class="red">(CFFC^)</span></p>
+									</div>
+									<div title="扇形二辺都市" class="column">
+										<img width="96" height="96" src="images/ccff.png">
+										<p>CCFF</p>
+									</div>
+									<div title="道付き二辺都市" class="column">
+										<img width="96" height="96" src="images/crrc.png">
+										<p>CRRC</p>
+									</div>
+									<div title="三辺都市" class="column">
+										<img width="96" height="96" src="images/ccfc.png">
+										<p>CCFC</p>
+									</div>
+								</div>
+								<div class="grid">
+									<div title="道付き三辺都市" class="column">
+										<img width="96" height="96" src="images/ccrc.png">
+										<p>CCRC</p>
+									</div>
+									<div title="四辺都市" class="column">
+										<img width="96" height="96" src="images/cccc.png">
+										<p>CCCCE <sup>※1</sup></p>
+									</div>
+									<div title="修道院" class="column">
+										<img width="96" height="96" src="images/ffff.png">
+										<p>FFFF</p>
+									</div>
+									<div title="道付き修道院" class="column">
+										<img width="96" height="96" src="images/ffrf.png">
+										<p>FFRF</p>
+									</div>
+								</div>
+								<ul class="nomark">
+									<li>※1: エンブレム付きタイルには末尾に E を追記する。</li>
+									<li>※2: CFFC^: ^ はタイルの角のイメージ</li>
+								</ul>
+								<!-- }}} -->
+							</dd>
+							<dt>タイルの向きの表現</dt>
+							<dd>
+								<!-- {{{ -->
+								<p>タイルの向きは以下の方法のいずれかを採用し、1 つの棋譜に置いてそれぞれの記法を混在させてはならない。</p>
+								<ol>
+									<li>
+										<p class="unindent">タイルの向きを表現するのにタイルの向きによりタイルの 12 時の方向の地形が変わるのであれば、その地形をタイルデザインのスタート記号とすることができる。</p>
+										<p class="unindent">例えば、スタートタイルが -90 度回転している場合は CRFR ではなく RFRC と記述しても良い。</p>
+									</li>
+									<li>
+										<p class="unindent">もうひとつのタイルデザインをの向きを表現する方法として、タイルデザイン表現は変更せず、タイルの回転角度を付加してタイルの向きを表現しても良い。</p>
+										<p class="unindent">スタートタイルが -90 度回転させられている場合は CRFR(-90) と記述しても良い。また CRFR(270) と記述しても良い。</p>
+										<p class="unindent">上記の例のように -90 度と 270 度は同じ回転角度を表すが、1 つの棋譜内ではどちらかに統一しなければならない。</p>
+									</li>
+								</ol>
+								<!-- }}} -->
+							</dd>
+							<dt>タイル上のミープルの表現</dt>
+							<dd>
+								<!-- {{{ -->
+								<p>ミープルは確保する地形の記号のすぐ後ろに記述する。</p>
+								<p class="unindent"><b>例:</b></p>
+								<ol class="alphabet">
+									<li>スタートタイルの都市に一辺都市の都市をつなげてタイルを配置し、ミープルを完成した都市上に置いた場合 FFCmF、あるいは CmFFF(+180) のように記述する。</li>
+									<li>ストレートタイルをプレイし道路の上にミープルを置いた場合、連続する道路の記号のすぐ跡に FRRmF と記述する。</li>
+									<li>三辺都市を 90 度傾けてプレイし、草原にミープルを置いた場合 CCCFM または CCFMC(+90) のように記述する。</li>
+									<li>道なし修道院タイルをプレイし、修道院にミープルを置いた場合 FFFFk のように記述する。</li>
+									<li>道有り修道院タイルを -90 度回転させてプレイし、道にミープルを置いた場合 FRkFF または FFRkF(-90) のように記述する。</li>
+								</ol>
+								<!-- }}} -->
+							</dd>
+						</dl>
+						<!-- }}} -->
+					</dd>
+					<dt>得点</dt>
+					<dd>
+						<p>得点は +C+R+Mで記載する。対戦相手のプレイによる得点には “+” の代わりに “*” をつける。得点がない地形は “+0” と記載する。</p>
+						<ul class="nomark">
+							<li>C: City による得点</li>
+							<li>R: Road による得点</li>
+							<li>M: Monastery による得点</li>
+						</ul>
+					</dd>
+					<dt>コメント</dt>
+					<dd><p>棋譜内容をわかりやすくするためのコメントを自由記述する。コメントの記法は 7. コメントを参照。</p></dd>
+				</dl>
+			</li>
+			<li id="lastscoring">
+				<p class="unindent">最終得点計算</p>
+				<p>以下の書式で記述する。得点がない地形は “+0” と記載する。</p>
+				<p class="unindent">Final Scoring: +C+R+M+F</p>
+				<ul class="nomark">
+					<li>C: City による得点</li>
+					<li>R: Road による得点</li>
+					<li>M: Monastery による得点</li>
+					<li>F: Field による得点</li>
+				</ul>
+			</li>
+			<li id="comment">
+				<p class="unindent">コメント</p>
+				<p>コメントはコメント記号 “//” で始まる任意の文字列。</p>
+				<p>“//” より右側に書かれる文字は全てコメントとして扱う。</p>
+				<p>行頭にコメント記号 “//” がある場合、行全体がコメントとして扱われる。</p>
+			</li>
+			<li id="appendix01">
+				<p class="unindent">付録 A</p>
+				<p>本稿をまとめながら、テキストによる棋譜記載方法の仕様策定作業と、情報システムに置ける通信プロトコルの設計、DB レコード設計との類似性に気づくこととなった。</p>
+				<p>棋譜データとして json や XML などのフォーマットを利用し、ソフトウェア間でデータ通信することにより、カルカソンヌのリアルタイム・リモート対戦実装が割と容易に実現できるのではないかという考えに至った (BGA バージョンは Web アプリであることから、そのように実装されているのではないかと推察する)。</p>
+				<p><a href="https://nostr.com/">Nostr プロトコル</a>を採用するのであれば、専用リレー・サーバを用意しさえすれば、ほぼサーバーサイドのコードを書くことなくシステムができてしまう。</p>
+				<p>私個人でのシステム開発となると自分の年齢を鑑みて荷が重いと判断し、実際の実装については今後の才能ある若い人たちに委ねたい。</p>
+			</li>
+		</ol>
+		<hr>
+		<div class="credit">
+			<p>13 Mar, 2024</p>
+			<p>文責: 大山貢 (OrzBruford)</p>
+		</div>
+	</div>
+</body>
+</html>
+
